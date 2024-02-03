@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\UserController;
@@ -7,10 +8,18 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 
-Route::group(["prefix"=>"Admins","as"=>"Admin."],function(){
+Route::group(["prefix"=>"Admins"],function(){
+    Auth::routes(["verify"=>true]);
+});
+Route::group(["prefix"=>"Admins","as"=>"Admin.","middleware"=>"verified"],function(){
+
     Route::group(["prefix"=>"Users","as"=>"User.","controller"=>UserController::class],function(){
         Route::get("/Add","create")->name("add");
         Route::get("/List","index")->name("List");
+        Route::post("/store","store")->name("store");
+        Route::get("/edit/{id}","edit")->name("edit");
+        Route::post("/Updata/{id}","update")->name("update");
+
     });
     Route::group(["prefix"=>"Category","as"=>"Category.","controller"=>CategoryController::class],function(){
         Route::get("/Add","create")->name("add");

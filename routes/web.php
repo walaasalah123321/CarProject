@@ -24,3 +24,7 @@ Route::group(["prefix"=>"Car","as"=>"Car.","controller"=>CarController::class],f
     Route::get("/Single/{id}","Single")->name("Single");
 
 });
+
+
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

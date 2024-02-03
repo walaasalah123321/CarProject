@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -12,7 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("Admin.User.List");
+        $users=User::get();
+        return view("Admin.User.List",compact("users"));
         
     }
 
@@ -27,9 +33,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data=$request->except(["_token"]);
+        $data["password"]=Hash::make($data['password']);
+        $data["Active"]=isset($data["Active"]);
+        $data["email_verified_at"]=time();
+        User::create($data);
+        Alert::success('Successfully', 'Add Done Successfully');
+        return Redirect()->back();
     }
 
     /**
@@ -45,15 +57,24 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+      $user=User::findOrFail($id);
+      return view("Admin.User.Edit",compact("user"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        //
+        $user=User::findOrFail($id);
+        $data=$request->except(["_token"]);
+        if(($request->password!=$user->password)){
+            $data["password"]=Hash::make($data['password']);
+        }
+        $data["Active"]=isset($data["Active"]);
+        $user->update($data);
+        Alert::success('Successfully', 'Update Done Successfully');
+        return Redirect()->route('Admin.Car.List');
     }
 
     /**

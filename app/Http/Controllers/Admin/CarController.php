@@ -71,9 +71,9 @@ class CarController extends Controller
     {
         $car=Car::findOrFail($id);
         $data=$request->except("_token");
-        if($request->has("image")){
+        if($request->has("Image")){
             unlink("Admin/Image/Car/".$car->Image);
-            $data["image"]=$this->uploadFile($request->Image,"Admin/Image/Car/");
+            $data["Image"]=$this->uploadFile($request->Image,"Admin/Image/Car/");
         }
         $data["Active"]=isset($request->Active);
         $car->update($data);
