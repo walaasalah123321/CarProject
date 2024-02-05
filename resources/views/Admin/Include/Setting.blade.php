@@ -7,12 +7,14 @@
 
             <div class="title_right">
                 <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                   <form action="{{URL::CURRENT()}}">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" class="form-control" placeholder="Search for..." name="Search">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
+                            <button class="btn btn-default" type="submit">Go!</button>
                         </span>
                     </div>
+                   </form>
                 </div>
             </div>
         </div>

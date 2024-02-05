@@ -17,7 +17,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::get();
+        $query=User::Query();
+        $request=Request();
+        if($Search=$request->Search){
+            $query->where("UserName","LIKE","%$Search%")->orWhere("email","LIKE","%$Search%");
+        }
+        $users=$query->get();
         return view("Admin.User.List",compact("users"));
         
     }
@@ -74,7 +79,7 @@ class UserController extends Controller
         $data["Active"]=isset($data["Active"]);
         $user->update($data);
         Alert::success('Successfully', 'Update Done Successfully');
-        return Redirect()->route('Admin.Car.List');
+        return Redirect()->route('Admin.User.List');
     }
 
     /**

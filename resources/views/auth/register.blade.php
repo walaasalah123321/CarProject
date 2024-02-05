@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   @include("Admin.Include.CssForAdd",["Page_name"=>"Register"])
+   @include("Admin.Include.CssForList",["Page"=>"Register"])
   </head>
 
   <body class="login">

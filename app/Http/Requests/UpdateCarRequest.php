@@ -22,7 +22,7 @@ class UpdateCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "Title"=>"required|min:3|string",
+           "Title"=>"required|min:3|string|unique:cars,Title,".$this->id,
            "Image"=>"sometimes|mimes:png,jpg,jpeg|max:2048",
            "Content"=>"required|max:2000",
            "Passengers"=>"required|integer",
@@ -40,6 +40,8 @@ class UpdateCarRequest extends FormRequest
                 "required"=>"Please Enter   Car Name ",
                 "min"=>" Car Name Should Be Maximum than 3 characters ",
                 "string"=>" Car Name Should Be String Letter",
+                "unique"=>"This Car is Added Before ",
+
 
             ],
             "Price"=>[

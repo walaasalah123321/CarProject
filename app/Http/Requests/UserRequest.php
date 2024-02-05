@@ -23,8 +23,8 @@ class UserRequest extends FormRequest
     {
         return [
             'FullName' => ['required', 'string', 'max:255'],
-            'UserName' => ['required', 'string', 'max:255',"unique:users"],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'UserName' => ['required', 'string', 'max:255',"unique:users,UserName,".$this->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->id],
             'password' => ['required', 'string', 'min:8'],
         ];
     }

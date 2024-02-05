@@ -19,7 +19,12 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars=Car::get();
+        $query=Car::Query();
+        $request=Request();
+        if($Search=$request->Search){
+            $query->where("Title","LIKE","%$Search%");
+        }
+        $cars=$query->get();
         return view('Admin.Car.List',compact("cars"));
         
     }

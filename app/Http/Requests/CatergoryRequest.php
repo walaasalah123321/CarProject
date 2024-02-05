@@ -23,7 +23,7 @@ class CatergoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "Category_Name"=>"required|unique:categories|max:20|min:3"
+            "Category_Name"=>"required|max:20|min:3|unique:categories,Category_Name,".$this->id,
         ];
     }
     public function messages(){

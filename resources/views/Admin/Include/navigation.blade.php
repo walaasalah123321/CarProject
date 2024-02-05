@@ -1,3 +1,4 @@
+<?php use Carbon\Carbon;?>
 <div class="top_nav">
     <div class="nav_menu">
         <div class="nav toggle">
@@ -40,7 +41,12 @@
                             <span class="image"><img src="{{asset('Admin/images/img.jpg')}}" alt="Profile Image" /></span>
                             <span>
                                 <span>{{$message->firstName}}{{$message->LastName}}</span>
-                                <span class="time">3 mins ago</span>
+                                <span class="time">
+                                    {{
+                                    Carbon::parse($message['created_at'])->diffForHumans(Carbon::now())
+                                    }}
+
+                                </span>
                             </span>
                             <span class="message">
                                 {{$message->Message}}

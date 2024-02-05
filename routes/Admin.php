@@ -39,7 +39,7 @@ Route::group(["prefix"=>"Admins","as"=>"Admin.","middleware"=>"verified"],functi
     });
     Route::group(["prefix"=>"Contact","as"=>"Contact.","controller"=>ContactController::class],function(){
         Route::get("/List","index")->name("List");
-        Route::post("/store","store")->name("store");
+       
         Route::get("/Show/{id}","show")->name("Show");
         Route::get("/Unread","unread")->name("unread");
 
@@ -53,4 +53,9 @@ Route::group(["prefix"=>"Admins","as"=>"Admin.","middleware"=>"verified"],functi
         Route::get("/edit/{id}","edit")->name("edit");
         Route::post("/Updata/{id}","update")->name("update");
     });
+});
+
+Route::group(["prefix"=>"Admins/Contact","as"=>"Admin.Contact.","controller"=>ContactController::class],function(){
+
+    Route::post("/store","store")->name("store");
 });
