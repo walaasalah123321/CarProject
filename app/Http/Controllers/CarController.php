@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    function __invoke(){
+        return view("Car.Error404");
+    }
     
     function Home(){
         $cars=Car::where("Active",1)->take(6)->get();

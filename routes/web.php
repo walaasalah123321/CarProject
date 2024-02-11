@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::fallback(CarController::class);
 
 Route::group(["prefix"=>"Car","as"=>"Car.","controller"=>CarController::class],function(){
     Route::get("/","Home")->name("Home");
@@ -22,7 +23,6 @@ Route::group(["prefix"=>"Car","as"=>"Car.","controller"=>CarController::class],f
     Route::get("/Blog","Blog")->name("Blog");
     Route::get("/Contact","Contact")->name("Contact");
     Route::get("/Single/{id}","Single")->name("Single");
-
 });
 
 

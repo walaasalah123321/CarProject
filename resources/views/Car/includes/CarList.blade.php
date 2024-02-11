@@ -36,7 +36,7 @@
                 </div>
                 </div>
                 <div>
-                <p>{{$car->Content}}</p>
+                <p>{{substr($car->Content,0,100)}} <a href="">...</a></p>
                 <p><a href="{{route('Car.Single',[$car->id])}}" class="btn btn-primary btn-sm">Rent Now</a></p>
                 </div>
             </div>
